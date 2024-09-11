@@ -1,0 +1,35 @@
+version: '3'
+services:
+  backend1:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend1
+  backend2:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend2
+  frontend1:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: frontend1
+
+  frontend2:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: frontend2
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend1
+      - backend2
+      - frontend1
+      - frontend2
